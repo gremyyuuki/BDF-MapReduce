@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-public class TokenizerMapperDistrict extends Mapper<Object, Text, Text, IntWritable> {
+public class TokenizerMapperSpecies extends Mapper<Object, Text, Text, IntWritable> {
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
 
@@ -15,15 +15,17 @@ public class TokenizerMapperDistrict extends Mapper<Object, Text, Text, IntWrita
             throws IOException, InterruptedException {
 
         StringTokenizer itr = new StringTokenizer(value.toString(), ";");
-        // drop GEOLOCALISATION column
+        // drop GEOLOCALISATION and ARRONDISSEMENT columns
+        itr.nextToken();
+        itr.nextToken();
         itr.nextToken();
 
-        String district = itr.nextToken();
-        if (district.equals("ARRONDISSEMENT"))
+        String kind = itr.nextToken();
+        if (kind.equals("ESPECE"))
         {
             return;
         }
-        word.set(district);
+        word.set(kind);
         context.write(word, one);
     }
 }

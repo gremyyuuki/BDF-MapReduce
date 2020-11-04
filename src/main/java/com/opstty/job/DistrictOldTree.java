@@ -1,31 +1,33 @@
 package com.opstty.job;
 
-import com.opstty.mapper.TokenizerMapper;
 import com.opstty.mapper.TokenizerMapperDistrict;
-import com.opstty.reducer.IntSumReducer;
+import com.opstty.mapper.TokenizerMapperDistrictOld;
 import com.opstty.reducer.IntSumReducerDistrict;
+import com.opstty.reducer.IntSumReducerDistrictOld;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-public class DistrictContainTree {
+public class DistrictOldTree {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length < 2) {
-            System.err.println("Usage: districttree <in> [<in>...] <out>");
+            System.err.println("Usage: districtoldtree <in> [<in>...] <out>");
             System.exit(2);
         }
-        Job job = Job.getInstance(conf, "districttree");
-        job.setJarByClass(DistrictContainTree.class);
-        job.setMapperClass(TokenizerMapperDistrict.class);
-        job.setCombinerClass(IntSumReducerDistrict.class);
-        job.setReducerClass(IntSumReducerDistrict.class);
+        Job job = Job.getInstance(conf, "districtoldtree");
+        job.setJarByClass(DistrictOldTree.class);
+        job.setMapperClass(TokenizerMapperDistrictOld.class);
+        job.setCombinerClass(IntSumReducerDistrictOld.class);
+        job.setReducerClass(IntSumReducerDistrictOld.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {
