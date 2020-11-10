@@ -1,9 +1,7 @@
 package com.opstty.job;
 
-import com.opstty.mapper.TokenizerMapper;
-import com.opstty.mapper.TokenizerMapperSpecies;
-import com.opstty.reducer.IntSumReducer;
-import com.opstty.reducer.IntSumReducerSpecies;
+import com.opstty.mapper.SpeciesMapper;
+import com.opstty.reducer.SpeciesReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -23,9 +21,9 @@ public class Species {
         }
         Job job = Job.getInstance(conf, "species");
         job.setJarByClass(Species.class);
-        job.setMapperClass(TokenizerMapperSpecies.class);
-        job.setCombinerClass(IntSumReducerSpecies.class);
-        job.setReducerClass(IntSumReducerSpecies.class);
+        job.setMapperClass(SpeciesMapper.class);
+        job.setCombinerClass(SpeciesReducer.class);
+        job.setReducerClass(SpeciesReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {

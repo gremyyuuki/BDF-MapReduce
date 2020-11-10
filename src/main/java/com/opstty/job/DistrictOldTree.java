@@ -1,9 +1,7 @@
 package com.opstty.job;
 
-import com.opstty.mapper.TokenizerMapperDistrict;
-import com.opstty.mapper.TokenizerMapperDistrictOld;
-import com.opstty.reducer.IntSumReducerDistrict;
-import com.opstty.reducer.IntSumReducerDistrictOld;
+import com.opstty.mapper.DistrictOldestTreeMapper;
+import com.opstty.reducer.DistrictOldestTreeReducer;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -25,9 +23,9 @@ public class DistrictOldTree {
         }
         Job job = Job.getInstance(conf, "districtoldtree");
         job.setJarByClass(DistrictOldTree.class);
-        job.setMapperClass(TokenizerMapperDistrictOld.class);
-        job.setCombinerClass(IntSumReducerDistrictOld.class);
-        job.setReducerClass(IntSumReducerDistrictOld.class);
+        job.setMapperClass(DistrictOldestTreeMapper.class);
+        job.setCombinerClass(DistrictOldestTreeReducer.class);
+        job.setReducerClass(DistrictOldestTreeReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {

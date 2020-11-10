@@ -471,7 +471,174 @@ Result output:
 
 `5       419`
 
+### 1.8.7 District containing the most trees
 
+This one was more complicated. There are 2 Map/Reduce processes going on here.
+
+Therefore, we put the whole log to show the entire process.
+```
+[fernst@hadoop-edge01 ~]$ yarn jar /home/fernst/hadoop-examples-mapreduce-1.0-187-jar-with-dependencies.jar districtmosttrees trees.csv lab3results/mosttrees
+
+20/11/10 19:04:56 INFO client.AHSProxy: Connecting to Application History server at hadoop-master03.efrei.online/163.172.100.24:10200
+20/11/10 19:04:56 INFO hdfs.DFSClient: Created token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031496527, maxDate=1605636296527, sequenceNumber=5958, masterKeyId=46 on ha-hdfs:efrei
+20/11/10 19:04:56 INFO security.TokenCache: Got dt for hdfs://efrei; Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031496527, maxDate=1605636296527, sequenceNumber=5958, masterKeyId=46)
+20/11/10 19:04:56 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /user/fernst/.staging/job_1603290159664_3508
+20/11/10 19:04:57 INFO input.FileInputFormat: Total input files to process : 1
+20/11/10 19:04:57 INFO mapreduce.JobSubmitter: number of splits:1
+20/11/10 19:04:57 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1603290159664_3508
+20/11/10 19:04:57 INFO mapreduce.JobSubmitter: Executing with tokens: [Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031496527, maxDate=1605636296527, sequenceNumber=5958, masterKeyId=46)]
+20/11/10 19:04:57 INFO conf.Configuration: found resource resource-types.xml at file:/etc/hadoop/3.1.5.0-152/0/resource-types.xml
+20/11/10 19:04:57 INFO impl.TimelineClientImpl: Timeline service address: hadoop-master03.efrei.online:8190
+20/11/10 19:04:58 INFO impl.YarnClientImpl: Submitted application application_1603290159664_3508
+20/11/10 19:04:58 INFO mapreduce.Job: The url to track the job: https://hadoop-master01.efrei.online:8090/proxy/application_1603290159664_3508/
+20/11/10 19:04:58 INFO mapreduce.Job: Running job: job_1603290159664_3508
+20/11/10 19:05:09 INFO mapreduce.Job: Job job_1603290159664_3508 running in uber mode : false
+20/11/10 19:05:09 INFO mapreduce.Job:  map 0% reduce 0%
+20/11/10 19:05:18 INFO mapreduce.Job:  map 100% reduce 0%
+20/11/10 19:05:27 INFO mapreduce.Job:  map 100% reduce 100%
+20/11/10 19:05:27 INFO mapreduce.Job: Job job_1603290159664_3508 completed successfully
+20/11/10 19:05:27 INFO mapreduce.Job: Counters: 53
+        File System Counters
+                FILE: Number of bytes read=152
+                FILE: Number of bytes written=493481
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=17088
+                HDFS: Number of bytes written=80
+                HDFS: Number of read operations=8
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=2
+        Job Counters
+                Launched map tasks=1
+                Launched reduce tasks=1
+                Data-local map tasks=1
+                Total time spent by all maps in occupied slots (ms)=21288
+                Total time spent by all reduces in occupied slots (ms)=27260
+                Total time spent by all map tasks (ms)=7096
+                Total time spent by all reduce tasks (ms)=6815
+                Total vcore-milliseconds taken by all map tasks=7096
+                Total vcore-milliseconds taken by all reduce tasks=6815
+                Total megabyte-milliseconds taken by all map tasks=10899456
+                Total megabyte-milliseconds taken by all reduce tasks=13957120
+        Map-Reduce Framework
+                Map input records=99
+                Map output records=98
+                Map output bytes=672
+                Map output materialized bytes=152
+                Input split bytes=99
+                Combine input records=98
+                Combine output records=17
+                Reduce input groups=17
+                Reduce shuffle bytes=152
+                Reduce input records=17
+                Reduce output records=17
+                Spilled Records=34
+                Shuffled Maps =1
+                Failed Shuffles=0
+                Merged Map outputs=1
+                GC time elapsed (ms)=198
+                CPU time spent (ms)=3030
+                Physical memory (bytes) snapshot=1448607744
+                Virtual memory (bytes) snapshot=7267921920
+                Total committed heap usage (bytes)=1548746752
+                Peak Map Physical memory (bytes)=1157652480
+                Peak Map Virtual memory (bytes)=3393564672
+                Peak Reduce Physical memory (bytes)=290955264
+                Peak Reduce Virtual memory (bytes)=3874357248
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=16989
+        File Output Format Counters
+                Bytes Written=80
+20/11/10 19:05:28 INFO client.AHSProxy: Connecting to Application History server at hadoop-master03.efrei.online/163.172.100.24:10200
+20/11/10 19:05:28 INFO hdfs.DFSClient: Created token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031528025, maxDate=1605636328025, sequenceNumber=5960, masterKeyId=46 on ha-hdfs:efrei
+20/11/10 19:05:28 INFO security.TokenCache: Got dt for hdfs://efrei; Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031528025, maxDate=1605636328025, sequenceNumber=5960, masterKeyId=46)
+20/11/10 19:05:28 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+20/11/10 19:05:28 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /user/fernst/.staging/job_1603290159664_3510
+20/11/10 19:05:28 INFO input.FileInputFormat: Total input files to process : 1
+20/11/10 19:05:28 INFO mapreduce.JobSubmitter: number of splits:1
+20/11/10 19:05:28 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1603290159664_3510
+20/11/10 19:05:28 INFO mapreduce.JobSubmitter: Executing with tokens: [Kind: HDFS_DELEGATION_TOKEN, Service: ha-hdfs:efrei, Ident: (token for fernst: HDFS_DELEGATION_TOKEN owner=fernst@EFREI.ONLINE, renewer=yarn, realUser=, issueDate=1605031528025, maxDate=1605636328025, sequenceNumber=5960, masterKeyId=46)]
+20/11/10 19:05:28 INFO impl.TimelineClientImpl: Timeline service address: hadoop-master03.efrei.online:8190
+20/11/10 19:05:29 INFO impl.YarnClientImpl: Submitted application application_1603290159664_3510
+20/11/10 19:05:29 INFO mapreduce.Job: The url to track the job: https://hadoop-master01.efrei.online:8090/proxy/application_1603290159664_3510/
+20/11/10 19:05:29 INFO mapreduce.Job: Running job: job_1603290159664_3510
+20/11/10 19:05:39 INFO mapreduce.Job: Job job_1603290159664_3510 running in uber mode : false
+20/11/10 19:05:39 INFO mapreduce.Job:  map 0% reduce 0%
+20/11/10 19:05:48 INFO mapreduce.Job:  map 100% reduce 0%
+20/11/10 19:05:54 INFO mapreduce.Job:  map 100% reduce 100%
+20/11/10 19:05:54 INFO mapreduce.Job: Job job_1603290159664_3510 completed successfully
+20/11/10 19:05:54 INFO mapreduce.Job: Counters: 53
+        File System Counters
+                FILE: Number of bytes read=15
+                FILE: Number of bytes written=492947
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=199
+                HDFS: Number of bytes written=6
+                HDFS: Number of read operations=8
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=2
+        Job Counters
+                Launched map tasks=1
+                Launched reduce tasks=1
+                Data-local map tasks=1
+                Total time spent by all maps in occupied slots (ms)=20436
+                Total time spent by all reduces in occupied slots (ms)=11580
+                Total time spent by all map tasks (ms)=6812
+                Total time spent by all reduce tasks (ms)=2895
+                Total vcore-milliseconds taken by all map tasks=6812
+                Total vcore-milliseconds taken by all reduce tasks=2895
+                Total megabyte-milliseconds taken by all map tasks=10463232
+                Total megabyte-milliseconds taken by all reduce tasks=5928960
+        Map-Reduce Framework
+                Map input records=17
+                Map output records=17
+                Map output bytes=112
+                Map output materialized bytes=15
+                Input split bytes=119
+                Combine input records=17
+                Combine output records=1
+                Reduce input groups=1
+                Reduce shuffle bytes=15
+                Reduce input records=1
+                Reduce output records=1
+                Spilled Records=2
+                Shuffled Maps =1
+                Failed Shuffles=0
+                Merged Map outputs=1
+                GC time elapsed (ms)=208
+                CPU time spent (ms)=3110
+                Physical memory (bytes) snapshot=1449603072
+                Virtual memory (bytes) snapshot=7268323328
+                Total committed heap usage (bytes)=1552416768
+                Peak Map Physical memory (bytes)=1154482176
+                Peak Map Virtual memory (bytes)=3394228224
+                Peak Reduce Physical memory (bytes)=295120896
+                Peak Reduce Virtual memory (bytes)=3874095104
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=80
+        File Output Format Counters
+                Bytes Written=6
+
+[fernst@hadoop-edge01 ~]$ hdfs dfs -cat lab3results/mosttrees/part-r-00000
+16      36
+```
 
 ### Remarks
 

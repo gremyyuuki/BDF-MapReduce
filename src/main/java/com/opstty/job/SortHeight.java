@@ -1,9 +1,7 @@
 package com.opstty.job;
 
-import com.opstty.mapper.TokenizerMapperMaxHeight;
-import com.opstty.mapper.TokenizerMapperSortHeight;
-import com.opstty.reducer.IntSumReducerMaxHeight;
-import com.opstty.reducer.IntSumReducerSortHeight;
+import com.opstty.mapper.SortHeightMapper;
+import com.opstty.reducer.SortHeightReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
@@ -24,9 +22,9 @@ public class SortHeight {
         }
         Job job = Job.getInstance(conf, "sortheight");
         job.setJarByClass(SortHeight.class);
-        job.setMapperClass(TokenizerMapperSortHeight.class);
-        job.setCombinerClass(IntSumReducerSortHeight.class);
-        job.setReducerClass(IntSumReducerSortHeight.class);
+        job.setMapperClass(SortHeightMapper.class);
+        job.setCombinerClass(SortHeightReducer.class);
+        job.setReducerClass(SortHeightReducer.class);
         job.setOutputKeyClass(DoubleWritable.class);
         job.setOutputValueClass(Text.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {

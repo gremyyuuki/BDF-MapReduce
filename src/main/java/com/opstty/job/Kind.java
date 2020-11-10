@@ -1,11 +1,7 @@
 package com.opstty.job;
 
-import com.opstty.mapper.TokenizerMapper;
-import com.opstty.mapper.TokenizerMapperKind;
-import com.opstty.mapper.TokenizerMapperSpecies;
-import com.opstty.reducer.IntSumReducer;
-import com.opstty.reducer.IntSumReducerKind;
-import com.opstty.reducer.IntSumReducerSpecies;
+import com.opstty.mapper.KindMapper;
+import com.opstty.reducer.KindReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -25,9 +21,9 @@ public class Kind {
         }
         Job job = Job.getInstance(conf, "kind");
         job.setJarByClass(Kind.class);
-        job.setMapperClass(TokenizerMapperKind.class);
-        job.setCombinerClass(IntSumReducerKind.class);
-        job.setReducerClass(IntSumReducerKind.class);
+        job.setMapperClass(KindMapper.class);
+        job.setCombinerClass(KindReducer.class);
+        job.setReducerClass(KindReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {
